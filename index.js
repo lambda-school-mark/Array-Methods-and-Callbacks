@@ -36,7 +36,7 @@ function getFinals(data) {
   });
 }
 
-console.log(getFinals(fifaData));
+// console.log(getFinals(fifaData));
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
@@ -55,29 +55,43 @@ function getWinners(callback, data) {
       return item["Home Team Name"];
     } else if (item["Away Team Goals"] > item["Home Team Goals"]) {
       return item["Away Team Name"];
+    } else {
+      return `It was a tie`;
     }
   });
 }
 
-const winners = getWinners(getFinals, fifaData);
-console.log(winners);
+// const winners = getWinners(getFinals, fifaData);
+// console.log(winners);
 
-/* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
+/* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns an set of strigs "In {year}, {country} won the world cup!" 
 
 Parameters: 
  * callback function getWinners
  * callback function getYears
  */
 
-function getWinnersByYear(winner, year) {}
+function getWinnersByYear(callback1, callback2, data) {
+  let years = callback1(getFinals, data);
+  let winners = callback2(getFinals, data);
+  winners.forEach(function (year, index) {
+    console.log(`In ${years[index]}, ${winners[index]} won the world cup!`);
+  });
+}
+getWinnersByYear(getYears, getWinners, fifaData);
 
-getWinnersByYear(getWinners, getYears);
+// const winner = getWinners(getFinals, fifaData);
+// const year = getYears(getFinals, fifaData);
+
+// function getWinnersByYear(winner, year) {
+//   return `In ${year}, ${winner} won the world cup!`;
+// }
+
+// console.log(getWinnersByYear(getWinners, getYears));
 
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
-  /* code here */
-}
+function getAverageGoals(data) {
 
 getAverageGoals();
 
